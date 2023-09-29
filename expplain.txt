@@ -1,0 +1,209 @@
+SHELL WINDOWS
+
+bash: bourne shell (sh, bash)
+
+cls : pour clear screen permet de vider le prompt
+pause: mettre en pause le programme
+par défaut nos commandes sont affichés dans le prompt ainsi que leurs exécutions. 
+@echo off : permet de ne plus affiché les commandes, les résultats uniquement. 
+echo. : permet d'avoir une line vide. 
+
+Remarques et commentaires:
+Les remarques s'affichent dans la console lors de l'affichage des commandes, mais ne s'affichent pas après avoir un @echo off
+les commentaires eux restent ceux qu'on connait. 
+
+Remarques: @REM, REM ou rem
+Commentaires: :: 
+
+LES VARIABLES: 
+Variables d'environnement windows
+
+%PATH%: les chemins d'exécution des programmes
+%CD% : repertoire courant
+%OS%, %DATE% : intuitif
+
+Own variables:
+set maChaine=Salut le monde 
+echo %maChaine%, les variables de type chaine sont plutôt délicats
+
+On peut déclarer une varibale de type int avec:
+set ou set /a (pour un peu plus vieux)
+et pour des variables qui vont recevoir du contenu taper au clavier: 
+set /p
+
+ATTENTION dans les affectations de variables, les variables gardent en mémoire les valeurs qui leur sont affectées et peuventt être accessible en dehors du script. 
+
+Les paramètres: 
+Des paramètres peuvent être utilisé pour renseigner des infos au clavier et récupéré les valeurs. ce qui est défini avec %param qui sont des chiffres ex: %1. 
+ex: 
+echo Salut %1 : ici le paramètres dois être entré lors du lancement du fichier, "param.bat paul"
+
+LA REDIRECTION D'ENTREE/SORTI
+ 
+l'entrée standart c'est le clavier, et quand on fait une rédirection c'est ne plus saisir les infos depuis le clavier, mais avoir ailleurs comme dans un fichier. 
+Dans ce cas quand nous lançons notre script : monScript.bat <notreFichier.txt 
+
+Pour la sortie il suffit de faire l'inverse monScript.bat>fichier.txt
+
+Les conditions: 
+Les opérateurs: 
+EQU: equal
+NEQ: Différent (Not equal)
+LSS: infèrieur(less)
+LES: inferieur ou egal (less or equal)
+GTR: superieur (Greater)
+GEQ: superieur ou egal (G or e)
+
+Ex: if %age% LSS 18 (
+    echo vous etes adolescent
+) else (
+    echo vous etes un adulte
+)
+
+ATTEENTION à ne mettre else à la ligne
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
