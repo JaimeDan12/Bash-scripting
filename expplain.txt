@@ -33,8 +33,10 @@ set /p
 
 ATTENTION dans les affectations de variables, les variables gardent en mémoire les valeurs qui leur sont affectées et peuventt être accessible en dehors du script. 
 
-Les paramètres: 
+LES PARAMETRES:
+ 
 Des paramètres peuvent être utilisé pour renseigner des infos au clavier et récupéré les valeurs. ce qui est défini avec %param qui sont des chiffres ex: %1. 
+Le %0 représente le nom du script. 
 ex: 
 echo Salut %1 : ici le paramètres dois être entré lors du lancement du fichier, "param.bat paul"
 
@@ -61,34 +63,107 @@ Ex: if %age% LSS 18 (
 )
 
 ATTEENTION à ne mettre else à la ligne
+Lors de la manipulation des repertoire, faire attention de toujours mettre les chemins dans des "", comme s'il contient des espaces, 
+le shell le prendra comme un seul argeument et non comme plusieurs.
+ex: set "newRep=%cd%\%1"
+
+Bash est très sensible à la casse, les espaces et autres, à fare attention. 
+exist: cette instruction permet de verifier l'existence de qlq chose. 
+
+ex: 
+set "newRep=%cd%\%1"
+if exist "%cd%"
+
+Initialiser une variable, et vérifier si celle ci l'est. 
+On peut verifier qu'une varibale a été défini avec la directive "define"
+et inverssement avec "not define". 
+ex: 
+if defined age (
+    echo vous avez %age%ans 
+)
+
+if not defined age (
+     set age=25
+)
+
+
+LES BOUCLES
+
+Boucles sur les chemins
+cela nous permet de lister les éléments d'un ou plusieurs répertoires.
+On peut spécifier plusieurs chemins dans la boucle en les séparant par des ','.
+On peut utiliser une option pour lister uniquement certains éléments:
+/d : les repertoires
+/r : les fichiers 
+
+Dans une boucle de compteur par exemple: la viriable de compteur n'est pas contenu dans %var% mais aura plutôt %%var devant. 
+
+Boucle sur les chemins
+ex: for /d %%d in ("%cd%"\monRep\*) do echo %%d
+/d : pour indiquer qu'on va parcourir des directory/repertoire
+%%d : faire office de variable de parcour, il va parcourir le repertoire racine
+
+:: lister les fichiers 
+for /r "%cd%"\monRep\ %%f in ("*.txt") do echo %%f : 
+cette boucle va parcourir le rep racine et chercher les fichiers en txt.
+
+Boucles avec compteur: 
+Pour permettre à ce qu'une variable soit mis à jour à chaque tour de boucle il faut spécifier dès le début du scipt: 
+
+setlocal ENABLEDELAYEDEXPANSION : cette instruction positionne un nouvel environnement pour une allocation dynamique des variables et prend maintenant en charge une nouvelle syntaxe. 
+Il dira donc au shell qu'il y'aura une varaible qui sera MAJ à chaque tour de boucle. 
+
+Ensuite il faut spécifier la varibale en question, en faisant !var!. 
+ex: 
+for /l %%i in (0 1 10) do (
+    for /l %%j in (0 1 10) do (
+        set /a mult=%%i*%%j
+        echo %%i * %%j = !mult!
+    )
+)
+
+/l : précise que nous allons use un compteur
+%%i : la variable compteur
+in (0 1 10): commence par initialiser notre compteur à 0, ensuite définit une plage allant de 1 à 10. 
+!mult! est la variable qui sera MAJ à chaque tour de boucle. 
+
+MECANISME DE SAUTS
+
+un programme s'exécute de manière sequentielle de la première à la dernière ligne. 
+Les sauts permettent de continuer un programme à partir de n'importe quelle ligne ou endroit. 
+
+Il va fonctionner avec deux élements: 
+
+- un label: pour indiquer un point précis dans le programme. C'est un string précédé d'un ':'. 
+- la cmd "goto": qui prend en paramètre le label et permet de continuer le programme à partir de ce label. 
+
+ex: 
+goto deuxième
+echo ma première phrase
+
+:deuxième 
+echo ma deuxieme phrase 
+
+Le premier echo sera ignoré et le prg ira directement sur le second. 
+ATTETION de ne faire n'importe quoi avec les sauts. 
 
 
 
+LES FONCTIONS: 
 
+Un peu comme dans les autres langage. 
+La seule différence c'est qu'ici on n'a pas le retour de context en dehors de la fonction, les variables modifiées par celle ci gardent les valeurs ajoutés dans la fonction. 
 
+Pour définir une fonction on l'appelle avec les :nomFonction
+:Mafonction puis 
+goto :eof : end of functoin. 
 
+Ensuite dans le programme principale on appelle notre fonction avec un call: 
+call :Mafonction
+puis goto : eof : pour mettre fin au programme, sinon il va lire ce qui suit l'appelle de fonction, sachant que le shell lit le programme de manière séquentielle. 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+Fonctions paramétrées: 
+Dans les fonctions, le %0 fait appelle au nom de la fonction. 
 
 
 
