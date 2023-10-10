@@ -52,7 +52,7 @@ Les opérateurs:
 EQU: equal
 NEQ: Différent (Not equal)
 LSS: infèrieur(less)
-LES: inferieur ou egal (less or equal)
+LEQ: inferieur ou egal (less or equal)
 GTR: superieur (Greater)
 GEQ: superieur ou egal (G or e)
 
@@ -94,7 +94,7 @@ cela nous permet de lister les éléments d'un ou plusieurs répertoires.
 On peut spécifier plusieurs chemins dans la boucle en les séparant par des ','.
 On peut utiliser une option pour lister uniquement certains éléments:
 /d : les repertoires
-/r : les fichiers 
+/r : les fichiers ou /f
 
 Dans une boucle de compteur par exemple: la viriable de compteur n'est pas contenu dans %var% mais aura plutôt %%var devant. 
 
@@ -165,15 +165,24 @@ puis goto : eof : pour mettre fin au programme, sinon il va lire ce qui suit l'a
 Fonctions paramétrées: 
 Dans les fonctions, le %0 fait appelle au nom de la fonction. 
 
+Quelques commandes: 
+type file.bat: affiche le contenu du fichier 
+find "word" file.bat : trouve un mot ou un groupe de mot dans un fichier. 
 
+LES FICHIERS
 
+LIRE UN FICHIER
+for /f "tokens=*" %%i in (output.txt) do (echo %%i)
 
+L'option "tokens=" est utilisée pour spécifier quelles parties de chaque ligne du fichier texte doivent être extraites et stockées dans une variable. Dans ce cas, "tokens=*" signifie que la totalité de chaque ligne du fichier sera stockée dans la variable.
 
+ECRIRE
+echo "Hello my input/output course">./i_o.txt
 
+RENOMMER: REN
+SUPP: Del 
 
-
-
-
+REGISTRE: 
 
 
 
